@@ -10,7 +10,7 @@ const Stack = createNativeStackNavigator();
 function AuthRoutes() {
     return (
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator initialRouteName={NavigationString.LOGIN}>
           <Stack.Screen name={NavigationString.LOGIN} component={LogIn} />
           <Stack.Screen name={NavigationString.LOGOUT} component={SingUp} />
         </Stack.Navigator>
