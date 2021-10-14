@@ -1,12 +1,15 @@
 import React from "react";
 import { View, Text, StyleSheet, Button } from 'react-native';
+import NavigationString from "../src/Navigations/NavigationString";
 import LogoutAuth from '../src/api/ApiTokenStore'
+import LogIn from "./Login";
 
 
-const Home = (props) =>{
-
+const Home = ({navigation,...props}) =>{
+    
     const handleLogout = () =>{
         LogoutAuth.removeToken()
+        navigation.navigate("LogIn")
     }
 
     return(

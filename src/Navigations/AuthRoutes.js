@@ -4,15 +4,17 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import NavigationString from './NavigationString';
 import LogIn from '../../components/Login';
 import SingUp from '../../components/SignUp';
+import Home from '../../components/Home';
 
 const Stack = createNativeStackNavigator();
 
 function AuthRoutes() {
     return (
       <NavigationContainer>
-        <Stack.Navigator initialRouteName={NavigationString.LOGIN}>
-          <Stack.Screen name={NavigationString.LOGIN} component={LogIn} />
-          <Stack.Screen name={NavigationString.LOGOUT} component={SingUp} />
+        <Stack.Navigator initialRouteName="LogIn">
+          <Stack.Screen name="LogIn" component={LogIn} />
+          <Stack.Screen name="SignUp" component={SingUp} />
+          <Stack.Screen name="Home" component={Home} />
         </Stack.Navigator>
       </NavigationContainer>
     );

@@ -6,16 +6,8 @@ import LoginToken from './src/api/ApiTokenStore';
 
 
 export default function App() {
-  const [isVisible, setisVisible] = useState(false)
   const [userToken, setUserToken] = useState(null)
 
-  const isVisibleHandler = () =>{
-    setisVisible(true)
-  }
-
-  const disableVisiblty = () =>{
-    setisVisible(false)
-  }
 
   const fetchToken = async () => {
     let result = await LoginToken.getToken();
@@ -38,8 +30,12 @@ export default function App() {
         <LogIn visible={isVisibleHandler}/>
         } */}
         {/* <SingUp visible={isVisible} disable={disableVisiblty}/> */}
-      
-        {userToken === null ? <AuthRoutes /> : <MainRoutes />}
+        {/* <NavigationContainer> */}
+          {/* {userToken === null ? <AuthRoutes /> : <MainRoutes />} */}
+        {/* </NavigationContainer> */}
+
+
+        <AuthRoutes />
     </View>
   );
 }

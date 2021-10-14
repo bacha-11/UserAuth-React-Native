@@ -6,7 +6,7 @@ import auth from "../src/api/user";
 
 
 
-const SingUp = (props) =>{
+const SingUp = ({navigation, ...props}) =>{
 
     const [isFocued, setisFocused] = useState(false)
 
@@ -19,7 +19,7 @@ const SingUp = (props) =>{
         
         let  result = await auth.signUp( username, email,  password, confirmPassword)
         console.log('api-result', result)
-        props.disable()
+        navigation.navigate("LogIn")
     }
   
 
@@ -32,7 +32,7 @@ const SingUp = (props) =>{
     })
     
     return(
-        <Modal visible={props.visible} animationType="slide">
+        <Modal  animationType="slide">
             <ScrollView>
             <View style={styles.container}>
                 <View style={styles.TextContainer}>
@@ -53,7 +53,7 @@ const SingUp = (props) =>{
                     (props)=>(
                         <View style={styles.InputContainer}>
                             <TextInput style={[styles.InputFields, {borderColor: isFocued ? '#0779ef': '#eee'}]} 
-                            placeholder="Enter UserName" 
+                            placeholder="Enter Username" 
                             onFocus={onFocusedHandler} 
                             onChangeText={props.handleChange('username')} 
                             value={props.values.username} 
@@ -102,8 +102,8 @@ const SingUp = (props) =>{
                 <View style={styles.BtnContainer}>
                     
 
-                    <TouchableOpacity onPress={props.disable}>
-                        <View style={[styles.Button, {backgroundColor:"#eb7d34"}]}>
+                    <TouchableOpacity onPress={()=>navigation.navigate("LogIn")}>
+                        <View style={[styles.Button, {backgroundColor:"#eb7d34", paddingHorizontal:40}]}>
                             <Text style={styles.ButtonText}>Go Back</Text>
                         </View>
                     </TouchableOpacity>
@@ -124,7 +124,8 @@ const styles = StyleSheet.create({
 
     TextContainer:{
         width:"100%",
-        marginVertical:30
+        marginVertical:40,
+        marginTop:"20%"
     },
 
     TextContainerTitle:{
@@ -160,8 +161,9 @@ const styles = StyleSheet.create({
     Button:{
         borderRadius:50,
         paddingHorizontal:"40%",
-        paddingVertical:"6%",
-        marginBottom:20
+        paddingVertical:"4%",
+        marginBottom:40,
+        alignSelf:"center"
     },
 
     ButtonText:{

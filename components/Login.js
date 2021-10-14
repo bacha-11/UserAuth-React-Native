@@ -2,14 +2,16 @@ import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity , ScrollView, Alert, TouchableWithoutFeedback, Keyboard, StyleSheet } from 'react-native';
 import { Formik, ErrorMessage } from "formik";
 import * as yup from 'yup';
+import NavigationString from "../src/Navigations/NavigationString";
 import auth from "../src/api/user";
-import authToken from '../src/api/ApiTokenStore'
+import authToken from '../src/api/ApiTokenStore';
 
 
 
-const LogIn = (props) =>{
+
+const LogIn = ({navigation ,...props}) =>{
     const [isFocued, setisFocused] = useState(false)
-
+    
     const onFocusedHandler = () =>{
         setisFocused(true)
     }
@@ -60,10 +62,10 @@ const LogIn = (props) =>{
                 [
                   {
                     text: "Cancel",
-                    onPress: () => console.log("Cancel Pressed"),
+                    onPress: () => navigation.navigate("Home"),
                     style: "cancel"
                   },
-                  { text: "OK", onPress: () => console.log("OK Pressed") }
+                  { text: "OK", onPress: () => navigation.navigate("Home") }
                 ]
               );
         }
@@ -99,7 +101,7 @@ const LogIn = (props) =>{
                             (props)=>(
                                 <View style={styles.InputContainer}>
                                     <TextInput style={[styles.InputFields, {borderColor: isFocued ? '#0779ef': '#eee', marginVertical:5}]}
-                                    placeholder="Enter UserName"
+                                    placeholder="Enter Username"
                                     onFocus={onFocusedHandler}
                                     onChangeText={props.handleChange('username')}
                                     value={props.values.username} 
@@ -130,7 +132,7 @@ const LogIn = (props) =>{
                     <View style={styles.SignUpContainer}>
                             <View>
                                 <Text > Don't have an account? 
-                                    <Text style={{color:"blue"}} onPress={props.visible}> SignUp </Text> 
+                                    <Text style={{color:"blue"}} onPress={()=>navigation.navigate('SignUp')}> SignUp </Text> 
                                 </Text>
                             </View>
                     </View>
@@ -151,8 +153,8 @@ const styles = StyleSheet.create({
 
     TextContainer:{
         width:"90%",
-        marginTop:"40%",
-        marginBottom:10
+        marginTop:"20%",
+        marginBottom:30
     },
 
     TextContainerTitle:{
@@ -193,8 +195,9 @@ const styles = StyleSheet.create({
     Button:{
         borderRadius:50,
         paddingHorizontal:"40%",
-        paddingVertical:"6%",
-        marginVertical:20
+        paddingVertical:"4%",
+        marginVertical:20,
+        alignSelf:"center"
     },
 
     ButtonText:{
