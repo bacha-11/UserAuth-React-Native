@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity , ScrollView, Alert, TouchableWithoutFeedback, Keyboard, StyleSheet } from 'react-native';
 import { Formik, ErrorMessage } from "formik";
 import * as yup from 'yup';
-import NavigationString from "../src/Navigations/NavigationString";
 import auth from "../src/api/user";
 import authToken from '../src/api/ApiTokenStore';
 
@@ -19,57 +18,60 @@ const LogIn = ({navigation ,...props}) =>{
     const apiSubmitHandler = async ({username, password}) =>{
         console.log('username-password',username,password);
         let  result = await auth.signIn( username, password)
+        console.log("result---", result)
+{
+    result.status == 200?
+    navigation.navigate("Home")
+    :
+    alert("Something went wrong...")
+}
 
-        if (result.data.message == "User Not found."){
-            console.log('User Does Not Exist')
-            Alert.alert(
-                "User Not found",
-                "User Does Not Exist ",
-                [
-                  {
-                    text: "Cancel",
-                    onPress: () => console.log("Cancel Pressed"),
-                    style: "cancel"
-                  },
-                  { text: "OK", onPress: () => console.log("OK Pressed") }
-                ]
-              );
+        // if (result.data.message == "User Not found."){
+        //     console.log('User Does Not Exist')
+        //     Alert.alert(
+        //         "User Not found",
+        //         "User Does Not Exist ",
+        //         [
+        //           {
+        //             text: "Cancel",
+        //             onPress: () => console.log("Cancel Pressed"),
+        //             style: "cancel"
+        //           },
+        //           { text: "OK", onPress: () => console.log("OK Pressed") }
+        //         ]
+        //       );
           
             
-        }
-        else if (!result.data.accessToken){
+        // }
+        // else if (!result.data.accessToken){
             
-            console.log('Invalid Email or Password')
-            Alert.alert(
-                "Invalid Credentials",
-                "User Does Not Exist ",
-                [
-                  {
-                    text: "Cancel",
-                    onPress: () => console.log("Cancel Pressed"),
-                    style: "cancel"
-                  },
-                  { text: "OK", onPress: () => console.log("OK Pressed") }
-                ]
-              );
-        }
-        else{
-            console.log("user------Loggedin")
-            authToken.storeToken(result.data.accessToken)
-            Alert.alert(
-                "LoggedIn",
-                "User Successfully LoggedIn",
-                [
-                  {
-                    text: "Cancel",
-                    onPress: () => navigation.navigate("Home"),
-                    style: "cancel"
-                  },
-                  { text: "OK", onPress: () => navigation.navigate("Home") }
-                ]
-              );
-        }
-        console.log('result.......', result.data)
+        //     console.log('Invalid Email or Password')
+        //     Alert.alert(
+        //         "Invalid Credentials",
+        //         "User Does Not Exist ",
+        //         [
+        //           {
+        //             text: "Cancel",
+        //             onPress: () => console.log("Cancel Pressed"),
+        //             style: "cancel"
+        //           },
+        //           { text: "OK", onPress: () => console.log("OK Pressed") }
+        //         ]
+        //       );
+        // }
+        // else{
+        //     console.log("user------Loggedin")
+        //     authToken.storeToken(result.data.accessToken)
+        //     Alert.alert(
+        //         "LoggedIn",
+        //         "User Successfully LoggedIn",
+        //         [
+                  
+        //           { text: "OK", onPress: () => navigation.navigate("Home") }
+        //         ]
+        //       );
+        // }
+       
     }
     
     const logInSchema = yup.object({

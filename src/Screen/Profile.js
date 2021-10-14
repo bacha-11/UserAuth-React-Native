@@ -1,11 +1,10 @@
 import React from "react";
 import { View, Text, StyleSheet, Button } from 'react-native';
-import NavigationString from "../src/Navigations/NavigationString";
-import LogoutAuth from '../src/api/ApiTokenStore'
-import LogIn from "./Login";
+import LogoutAuth from '../api/ApiTokenStore'
 
 
-const Home = ({navigation,...props}) =>{
+
+const Profile = ({navigation}) =>{
     
     const handleLogout = () =>{
         LogoutAuth.removeToken()
@@ -13,16 +12,17 @@ const Home = ({navigation,...props}) =>{
     }
 
     return(
-        <View style={styles.HomeContainer}>
-            <Text>Home Page</Text>
+        <View style={styles.ProfileContainer}>
+            <Text>Profile Page</Text>
             <Button onPress={handleLogout} title="Logout" />
+            
         </View>
     )
 }
 
 
 const styles = StyleSheet.create({
-    HomeContainer:{
+    ProfileContainer:{
         flex:1,
         justifyContent:'center',
         alignItems:"center"
@@ -31,4 +31,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default Home;
+export default Profile;
