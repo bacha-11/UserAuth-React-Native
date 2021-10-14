@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import AuthRoutes from './src/Navigations/AuthRoutes';
+import MainRoutes from './src/Navigations/MainRousts';
 import Home from './components/Home';
 import LogIn from './components/Login';
 import SingUp from './components/SignUp';
@@ -22,6 +25,8 @@ export default function App() {
     setUserToken(result)
     console.log('@@@Last Stored Token--', result)
   }
+ 
+
 
   useEffect(()=>{
     fetchToken()
@@ -30,14 +35,16 @@ export default function App() {
   return (
     <View style={styles.container}>
       
-        {userToken?
+        {/* {userToken?
         <Home />
         :
         <LogIn visible={isVisibleHandler}/>
-        }
+        } */}
         {/* <SingUp visible={isVisible} disable={disableVisiblty}/> */}
       
-      
+        <NavigationContainer>
+          {userToken === null ? <AuthRoutes /> : <MainRoutes />}
+        </NavigationContainer>
     </View>
   );
 }
